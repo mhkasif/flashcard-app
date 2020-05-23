@@ -64,3 +64,7 @@ or
 ```shell
 $ expo start
 ```
+
+
+## NOTE
+This App was tested on expo(Iphone-physicalDevice)
