@@ -16,10 +16,7 @@ const DecksPage = ({ navigation }) => {
 
   React.useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
-      // Screen was focused
-      // Do something
       const abc = async () => {
-
         const cards = await getDecks();
         setData(cards);
       };

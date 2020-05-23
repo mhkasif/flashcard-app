@@ -2,51 +2,24 @@ import { AsyncStorage } from "react-native";
 
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
-export const Data = {
-  React: {
-    title: "React",
-    questions: [
-      {
-        question: "What is React?",
-        answer: "A library for managing user interfaces",
-      },
-      {
-        question: "Where do you make Ajax requests in React?",
-        answer: "The componentDidMount lifecycle event",
-      },
-    ],
-  },
-  JavaScript: {
-    title: "JavaScript",
-    questions: [
-      {
-        question: "What is a closure?",
-        answer:
-          "The combination of a function and the lexical environment within which that function was declared.",
-      },
-    ],
-  },
-};
-// export const setData =async () => {
-//   try {
-//     Object.entries(Data).forEach((d) => {
-//       // console.log(d[0]);
-//      await AsyncStorage.setItem(d[0], JSON.stringify(d[1]));
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+/**
+ * @description Get All the decks from local storage
+ */
 export const getDecks = async () => {
   const cardsData = [];
   const keys = await AsyncStorage.getAllKeys();
   const dataAll = await AsyncStorage.multiGet(keys);
   dataAll.forEach((data) => {
-    if(data[0]!==NOTIFICATION_KEY)
-    cardsData.push({ [data[0]]: JSON.parse(data[1]) });
+    if (data[0] !== NOTIFICATION_KEY)
+      cardsData.push({ [data[0]]: JSON.parse(data[1]) });
   });
   return cardsData;
 };
+/**
+* @description Get the deck of particular id
+* @param {string} id - id to fetch particular book
+
+*/
 export const getDeck = async (id) => {
   try {
     const data = await AsyncStorage.getItem(id);
@@ -55,6 +28,11 @@ export const getDeck = async (id) => {
     console.log(error);
   }
 };
+/**
+ * @description Save the new Deck by its title
+ * @param {string} title - The title of the Deck
+ * @param {number} source - Image source
+ */
 export const saveDeckTitle = async (title, source) => {
   try {
     await AsyncStorage.setItem(
@@ -65,6 +43,12 @@ export const saveDeckTitle = async (title, source) => {
     console.log(error);
   }
 };
+/**
+ * @description Add question/card to particular deck
+ * @constructor
+ * @param {string} title - The title of the deck
+ * @param {object} card - contains card details
+ */
 export const addCardToDeck = async (title, card) => {
   try {
     var item = await AsyncStorage.getItem(title);
@@ -76,6 +60,12 @@ export const addCardToDeck = async (title, card) => {
     console.log(error);
   }
 };
+/**
+* @description To delete particular deck
+* @constructor
+* @param {string} id - The id of the book
+
+*/
 export const deleteDeck = async (id) => {
   try {
     await AsyncStorage.removeItem(id);
@@ -87,15 +77,25 @@ export const deleteDeck = async (id) => {
 //notification
 
 const NOTIFICATION_KEY = "FLASHCARD_APP";
+/**
+ * @description Value to be shown daily in notification
+ */
 export const getDailyReminderValue = () => {
   return {
     today: "👋 Don't forget to play today!",
   };
 };
+/**
+ * @description clears  the notification
+ */
 export const clearLocalNotification = () => {
-return AsyncStorage.removeItem(NOTIFICATION_KEY).then(Notifications.cancelAllScheduledNotificationsAsync)
-
+  return AsyncStorage.removeItem(NOTIFICATION_KEY).then(
+    Notifications.cancelAllScheduledNotificationsAsync
+  );
 };
+/**
+ * @description Creates Notification
+ */
 export const createNotification = () => {
   return {
     title: "Start your quiz now",
@@ -111,6 +111,9 @@ export const createNotification = () => {
     },
   };
 };
+/**
+ * @description Setting up notification
+ */
 export const setLocalNotification = () => {
   AsyncStorage.getItem(NOTIFICATION_KEY)
     .then(JSON.parse)

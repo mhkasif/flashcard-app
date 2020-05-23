@@ -40,87 +40,34 @@ const DeckDetailsPage = ({ navigation, route: { params } }) => {
     inputRange: [0, 1],
     outputRange: [150, 0],
   });
-  // React.useEffect(() => {
-  //   console.log('deck details rendered out');
-
-  //   const unsubscribe = navigation.addListener("focus", () => {
-  //     // Screen was focused
-  //     // Do something
-  //     console.log('deck details rendered');
-  //     Animated.timing(animation.card.opacity, {
-  //       toValue: 1,
-  //       duration:800,
-  //       useNativeDriver:true
-  //     }).start();
-  //     Animated.timing(animation.button1.translateY, {
-  //       toValue: 1,
-  //       duration: 800,
-  //       useNativeDriver:true
-
-  //     }).start();
-  //     Animated.timing(animation.button2.translateY, {
-  //       toValue: 1,
-  //       duration: 500,
-  //       delay:400,
-  //       useNativeDriver:true
-
-  //     }).start();
-  //     Animated.timing(animation.button3.translateY, {
-  //       toValue: 1,
-  //       duration: 500,
-  //       delay:600,
-  //       useNativeDriver:true
-
-  //     }).start();
-
-  //     const abc = async () => {
-  //       let dt = await getDeck(title);
-  //       dt = JSON.parse(dt);
-  //       const newParam = {
-  //         [dt.title]: dt,
-  //       };
-
-  //       changeVal(newParam);
-  //     };
-  //     abc();
-  //     return ()=>{
-
-  //       unsubscribe()
-  //     }
-  //   });
-
-  //   return unsubscribe;
-  // }, [navigation]);
 
   useFocusEffect(
     React.useCallback(() => {
-      // Do something when the screen is focused
       console.log("deck details rendered out");
 
       const unsubscribe = navigation.addListener("focus", () => {
-        // Screen was focused
-        // Do something
         console.log("deck details rendered");
         Animated.timing(animation.card.opacity, {
           toValue: 1,
-          duration: 800,
+          duration: 1000,
           useNativeDriver: true,
         }).start();
         Animated.timing(animation.button1.translateY, {
           toValue: 1,
-          duration: 800,
+          duration: 600,
+          delay: 200,
           useNativeDriver: true,
         }).start();
         Animated.timing(animation.button2.translateY, {
           toValue: 1,
-          duration: 500,
+          duration: 600,
           delay: 400,
           useNativeDriver: true,
         }).start();
         Animated.timing(animation.button3.translateY, {
           toValue: 1,
           duration: 500,
-          delay: 600,
+          delay: 500,
           useNativeDriver: true,
         }).start();
 
@@ -136,10 +83,7 @@ const DeckDetailsPage = ({ navigation, route: { params } }) => {
         abc();
       });
       return () => {
-
-
         changeVal(null);
-
       };
     }, [navigation, params])
   );

@@ -13,7 +13,7 @@ import {
   GreenButtonFilled,
   RedButtonBorder,
 } from "../../Components/Buttons/Buttons";
-import {clearLocalNotification, setLocalNotification} from '../../Data';
+import { clearLocalNotification, setLocalNotification } from "../../Data";
 
 const QuizPage = ({
   route: {
@@ -21,8 +21,6 @@ const QuizPage = ({
   },
   navigation,
 }) => {
-  // const {questions}=params
-  //   console.log(props);
   const [questionNumber, nextQuestion] = React.useState(0);
   const [correctAnswers, correct] = React.useState(0);
   const [showAnswer, changeCard] = React.useState(false);
@@ -36,6 +34,11 @@ const QuizPage = ({
     inputRange: [0, 1],
     outputRange: ["0deg", "180deg"],
   });
+
+  /**
+* @description toggle between question and answer
+
+*/
   const toggleAnswer = () => {
     new Promise((res, r) => {
       setTimeout(() => res(changeCard(!showAnswer)), 400);
@@ -44,26 +47,26 @@ const QuizPage = ({
       Animated.timing(animation.questionCard.rotateY, {
         toValue: 1,
         duration: 800,
-        useNativeDriver:true
-
+        useNativeDriver: true,
       }).start();
     } else {
       Animated.timing(animation.questionCard.rotateY, {
         toValue: 0,
         duration: 800,
-        useNativeDriver:true
-
+        useNativeDriver: true,
       }).start();
     }
   };
+  /**
+* @description restarts the quiz
+
+*/
   const resetQuiz = () => {
     correct(0);
     nextQuestion(0);
   };
   if (questions.length !== 0 && questionNumber >= questions.length) {
-      clearLocalNotification().then(
-          setLocalNotification
-      )
+    clearLocalNotification().then(setLocalNotification);
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text style={[styles.heading, { color: "black" }]}>

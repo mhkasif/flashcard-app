@@ -7,21 +7,12 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from "react-native";
-// import { TouchableOpacity } from "react-native-gesture-handler";
-// const image = { uri: "https://reactjs.org/logo-og.png" };
-const images = [
-  { source: require("../../assets/1.jpg") },
-  { source: require("../../assets/2.jpg") },
-  { source: require("../../assets/3.jpg") },
-  { source: require("../../assets/4.jpg") },
-  { source: require("../../assets/5.jpg") },
-];
-const Card = ({  navigation, noNavigation,data }) => {
 
-const arrayData=Object.entries(data)
-const {source,title,questions}=arrayData[0][1]
+const Card = ({ navigation, noNavigation, data }) => {
+  const arrayData = Object.entries(data);
+  const { source, title, questions } = arrayData[0][1];
 
-  return data&& noNavigation ? (
+  return data && noNavigation ? (
     <ImageBackground source={source} style={styles.cardContainer}>
       <Text style={styles.heading}>{title}</Text>
       <Text style={styles.number}>{questions.length} cards</Text>
@@ -29,15 +20,12 @@ const {source,title,questions}=arrayData[0][1]
   ) : (
     <TouchableOpacity
       activeOpacity={0.8}
-      onPress={() => navigation.navigate("Deck-Details",{title})}
+      onPress={() => navigation.navigate("Deck-Details", { title })}
     >
-    <ImageBackground source={source} style={styles.cardContainer}>
-
+      <ImageBackground source={source} style={styles.cardContainer}>
         <Text style={styles.heading}>{title}</Text>
         <Text style={styles.number}>{questions.length} cards</Text>
-
-        </ImageBackground>
-
+      </ImageBackground>
     </TouchableOpacity>
   );
 };

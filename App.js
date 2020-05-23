@@ -2,7 +2,6 @@ import "react-native-gesture-handler";
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 
-
 import AddDeckPage from "./Pages/AddDeckPage/AddDeckPage";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
@@ -10,12 +9,12 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { DecksStackScreen } from "./Screens/DecksScreen";
 import { AddDecksStackScreen } from "./Screens/AddDeckScreen";
-import {setLocalNotification} from './Data';
+import { setLocalNotification } from "./Data";
 export default function App() {
   const Tab = createBottomTabNavigator();
-React.useEffect(()=>{
-setLocalNotification()
-},[])
+  React.useEffect(() => {
+    setLocalNotification();
+  }, []);
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -46,14 +45,9 @@ setLocalNotification()
           inactiveTintColor: "gray",
         }}
       >
-        <Tab.Screen
-          name="Decks"
-          component={DecksStackScreen}
-
-        />
+        <Tab.Screen name="Decks" component={DecksStackScreen} />
         <Tab.Screen name="Add-Deck" component={AddDecksStackScreen} />
       </Tab.Navigator>
-
     </NavigationContainer>
   );
 }

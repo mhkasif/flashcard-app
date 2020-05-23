@@ -10,28 +10,26 @@ import {
   Keyboard,
 } from "react-native";
 import { BlueButtonFilled } from "../../Components/Buttons/Buttons";
-import {saveDeckTitle} from '../../Data';
-import { useFocusEffect } from '@react-navigation/native';
+import { saveDeckTitle } from "../../Data";
+import { useFocusEffect } from "@react-navigation/native";
 const images = [
-    { source: require("../../assets/1.jpg") },
-    { source: require("../../assets/2.jpg") },
-    { source: require("../../assets/3.jpg") },
-    { source: require("../../assets/4.jpg") },
-    { source: require("../../assets/5.jpg") },
-  ];
-const AddDeckPage = ({navigation}) => {
+  { source: require("../../assets/1.jpg") },
+  { source: require("../../assets/2.jpg") },
+  { source: require("../../assets/3.jpg") },
+  { source: require("../../assets/4.jpg") },
+  { source: require("../../assets/5.jpg") },
+];
+const AddDeckPage = ({ navigation }) => {
   const [value, onChangeText] = useState("");
   const [borderColor, changeColor] = useState("#a8a8a8");
   const image = images[Math.floor(Math.random() * 5)].source;
   useFocusEffect(
     React.useCallback(() => {
-return ()=>{
-  console.log('unmounted');
-  onChangeText('')
-}
-
-    },[])
-  )
+      return () => {
+        onChangeText("");
+      };
+    }, [])
+  );
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -51,7 +49,14 @@ return ()=>{
           multiline
           onFocus={() => changeColor("#24b1ed")}
         />
-        <BlueButtonFilled disabled={!value} onPress={()=>{saveDeckTitle(value,image);navigation.navigate('Deck-Details',{title:value})}} text="Create Deck" />
+        <BlueButtonFilled
+          disabled={!value}
+          onPress={() => {
+            saveDeckTitle(value, image);
+            navigation.navigate("Deck-Details", { title: value });
+          }}
+          text="Create Deck"
+        />
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
