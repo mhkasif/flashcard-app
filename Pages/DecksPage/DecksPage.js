@@ -26,11 +26,17 @@ const DecksPage = ({ navigation }) => {
   }, [navigation]);
   return (
     <SafeAreaView style={styles.decksPage}>
+    {data.length?
       <FlatList
-        data={data}
-        renderItem={(item) => <Card navigation={navigation} data={item.item} />}
-        keyExtractor={(item, idx) => idx.toString()}
+      data={data}
+      renderItem={(item) => <Card navigation={navigation} data={item.item} />}
+      keyExtractor={(item, idx) => idx.toString()}
       />
+    :
+
+    <Text style={{fontSize:25,paddingTop:100}} >No Deck To be Shown.</Text>
+
+  }
     </SafeAreaView>
   );
 };
