@@ -10,7 +10,6 @@ import { deleteDeck, addCardToDeck, getDeck } from "../../Data";
 import { useFocusEffect } from "@react-navigation/native";
 
 const DeckDetailsPage = ({ navigation, route: { params } }) => {
-  console.log(params);
   const [values, changeVal] = React.useState(null);
 
   const { title } = params;
@@ -43,10 +42,7 @@ const DeckDetailsPage = ({ navigation, route: { params } }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      console.log("deck details rendered out");
-
       const unsubscribe = navigation.addListener("focus", () => {
-        console.log("deck details rendered");
         Animated.timing(animation.card.opacity, {
           toValue: 1,
           duration: 1000,

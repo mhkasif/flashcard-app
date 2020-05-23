@@ -1,6 +1,6 @@
 import React from "react";
 
-import { TouchableOpacity, Text, StyleSheet, View } from "react-native";
+import { TouchableOpacity, Text, StyleSheet, View,Button } from "react-native";
 
 export const BlueButtonFilled = (
   { text, navigation, onPress, disabled, style },
@@ -66,7 +66,10 @@ export const RedButtonBorder = ({ text, onPress, style }, props) => {
     </TouchableOpacity>
   );
 };
+export const GoBackButton=({onPress})=>{
+ return <Button title="&larr;Go Back" onPress={onPress} />
 
+}
 const styles = StyleSheet.create({
   txt: {
     fontSize: 18,

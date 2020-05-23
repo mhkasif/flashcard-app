@@ -12,6 +12,7 @@ import {
 import {
   GreenButtonFilled,
   RedButtonBorder,
+  GoBackButton,
 } from "../../Components/Buttons/Buttons";
 import { clearLocalNotification, setLocalNotification } from "../../Data";
 
@@ -39,7 +40,18 @@ const QuizPage = ({
 * @description toggle between question and answer
 
 */
-  const toggleAnswer = () => {
+  const toggleAnswer = async(val) => {
+    if (val === 5 ) {
+      new Promise((res, r) => {
+        setTimeout(() => res(changeCard(false)), 0);
+      });
+      Animated.timing(animation.questionCard.rotateY, {
+        toValue: 0,
+        duration: 0,
+        useNativeDriver: true,
+      }).start();
+      return;
+    }
     new Promise((res, r) => {
       setTimeout(() => res(changeCard(!showAnswer)), 400);
     });
@@ -73,7 +85,7 @@ const QuizPage = ({
           Correct Answers: {correctAnswers}
         </Text>
         <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
-          <Button title="&larr;Go Back" onPress={() => navigation.goBack()} />
+          <GoBackButton onPress={() => navigation.goBack()} />
           <Button title="Reset" onPress={resetQuiz} />
         </View>
       </View>
@@ -87,7 +99,7 @@ const QuizPage = ({
             Sorry You cannot take the quiz because there are no cards in the
             deck.
           </Text>
-          <Button title="&larr; BACK" onPress={() => navigation.goBack()} />
+          <GoBackButton onPress={() => navigation.goBack()} />
         </View>
       ) : (
         <Animated.View
@@ -161,13 +173,18 @@ const QuizPage = ({
           />
           <GreenButtonFilled
             onPress={() => {
+              toggleAnswer(5);
               correct(correctAnswers + 1);
               nextQuestion(questionNumber + 1);
             }}
             text="Correct"
           />
           <RedButtonBorder
-            onPress={() => nextQuestion(questionNumber + 1)}
+            onPress={() => {
+
+              toggleAnswer(5);
+              nextQuestion(questionNumber + 1);
+            }}
             text="Incorrect"
           />
         </Animated.View>
@@ -178,7 +195,7 @@ const QuizPage = ({
 const styles = StyleSheet.create({
   cardContainer: {
     width: Dimensions.get("screen").width - 50,
-    // backgroundColor: "red",
+
     height: 200,
     borderRadius: 5,
     marginTop: 20,
